@@ -1,0 +1,145 @@
+/* static/admin/css/custom.css */
+
+/* ============================================
+   CHANGE ENTIRE NAVIGATION BAR COLOR
+============================================ */
+
+/* Top navigation bar (main header) */
+.main-header {
+    background-color: #B2A675 !important;
+}
+
+/* Top navbar itself */
+.main-header .navbar {
+    background-color: #B2A675 !important;
+}
+
+/* Left sidebar */
+.main-sidebar,
+.main-sidebar .sidebar {
+    background-color: #B2A675 !important;
+}
+
+/* Sidebar brand/logo area */
+.brand-link {
+    background-color: #9e8f5e !important;
+    border-bottom: 1px solid #8a7d52 !important;
+}
+
+/* ============================================
+   TEXT AND ICON COLORS FOR READABILITY
+============================================ */
+
+/* Top navbar text and icons */
+.main-header .navbar .nav-link {
+    color: #2c2b28 !important;
+}
+
+.main-header .navbar .nav-link:hover {
+    color: white !important;
+}
+
+/* Sidebar navigation links */
+.nav-sidebar .nav-item .nav-link {
+    color: #2c2b28 !important;
+}
+
+/* Sidebar active link */
+.nav-sidebar .nav-item .nav-link.active {
+    background-color: #9e8f5e !important;
+    color: white !important;
+}
+
+/* Sidebar hover effect */
+.nav-sidebar .nav-item .nav-link:hover {
+    background-color: #9e8f5e !important;
+    color: white !important;
+}
+
+/* Sidebar icons */
+.nav-sidebar .nav-item .nav-link i {
+    color: #2c2b28 !important;
+}
+
+.nav-sidebar .nav-item .nav-link.active i {
+    color: white !important;
+}
+
+/* Sidebar headers (section titles) */
+.sidebar .nav-header {
+    color: #2c2b28 !important;
+    font-weight: bold !important;
+}
+
+/* Dropdown/treeview menus */
+.nav-sidebar .nav-treeview .nav-link {
+    background-color: #a69a6a !important;
+    color: #2c2b28 !important;
+}
+
+.nav-sidebar .nav-treeview .nav-link:hover {
+    background-color: #9e8f5e !important;
+    color: white !important;
+}
+
+/* Brand text */
+.brand-link .brand-text,
+.brand-link span {
+    color: #2c2b28 !important;
+}
+
+/* User dropdown in top bar */
+.main-header .navbar .dropdown-menu {
+    background-color: #B2A675 !important;
+}
+
+.main-header .navbar .dropdown-item {
+    color: #2c2b28 !important;
+}
+
+.main-header .navbar .dropdown-item:hover {
+    background-color: #9e8f5e !important;
+    color: white !important;
+}
+
+/* Remove any dark theme leftovers */
+.sidebar-dark-primary,
+.sidebar-dark-primary .sidebar {
+    background-color: #B2A675 !important;
+}
+
+/* Fix any default black backgrounds */
+.navbar-nav .nav-link {
+    color: #2c2b28 !important;
+}
+
+
+/* Force hide Jazzmin's default "A" logo */
+.brand-link .brand-image {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+.brand-link::before {
+    display: none !important;
+    content: "" !important;
+}
+
+/* Remove any default images in brand-link */
+.brand-link img {
+    display: none !important;
+}
+
+/* Hide the brand text completely */
+.brand-text {
+    display: none !important;
+}
+
+/* Remove padding from brand-link when empty */
+.brand-link {
+    padding: 0 !important;
+    background-color: #9e8f5e !important;
+}

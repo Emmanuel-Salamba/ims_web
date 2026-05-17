@@ -1,0 +1,1 @@
+"3.11.13" | Out-File -FilePath "backend\.python-version" -Encoding UTF8 -NoNewline

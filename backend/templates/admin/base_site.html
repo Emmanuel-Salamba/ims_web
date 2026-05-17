@@ -1,0 +1,619 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block extrahead %}
+<link rel="icon" href="/media/logos/ims-icon.png" type="image/png">
+<link rel="shortcut icon" href="/media/logos/ims-icon.png" type="image/png">
+<style>
+    
+    /* ============================================
+       FIX ALL ADD, SEARCH, GO BUTTONS TO GRAY
+    ============================================ */
+    
+    /* All "ADD" buttons everywhere (Add User, Add Content Item, Add Event, etc.) */
+    .addlink,
+    a.addlink,
+    .object-tools a.addlink,
+    .submit-row .addlink,
+    .button.addlink,
+    [href*="/add/"]:not(.changelink):not(.deletelink),
+    .model-addlink {
+        background-color: #6c757d !important;
+        border-color: #6c757d !important;
+        color: white !important;
+        font-weight: bold !important;
+        border-radius: 4px !important;
+        padding: 5px 12px !important;
+        text-decoration: none !important;
+    }
+    
+    .addlink:hover,
+    a.addlink:hover,
+    .object-tools a.addlink:hover,
+    [href*="/add/"]:hover:not(.changelink):not(.deletelink) {
+        background-color: #5a6268 !important;
+        border-color: #5a6268 !important;
+        color: white !important;
+    }
+    
+    /* Search and GO buttons */
+    .search-container button,
+    .search-form button,
+    .changelist-search button,
+    .search-group button,
+    button[type="submit"].default,
+    input[type="submit"].default,
+    .changelist .button,
+    #searchbar ~ button,
+    .submit-row .default,
+    .search-actions button {
+        background-color: #6c757d !important;
+        border-color: #6c757d !important;
+        color: white !important;
+        font-weight: bold !important;
+        border-radius: 4px !important;
+        padding: 5px 12px !important;
+    }
+    
+    .search-container button:hover,
+    .search-form button:hover,
+    .changelist-search button:hover,
+    .search-group button:hover,
+    #searchbar ~ button:hover,
+    .search-actions button:hover {
+        background-color: #5a6268 !important;
+        color: white !important;
+    }
+    
+    /* Any primary button that might be blue */
+    .btn-primary,
+    .btn-primary:active,
+    .btn-primary:focus,
+    .btn-primary.active,
+    .btn-primary:not(.btn-danger):not(.btn-success) {
+        background-color: #6c757d !important;
+        border-color: #6c757d !important;
+        color: white !important;
+        box-shadow: none !important;
+    }
+    
+    .btn-primary:hover {
+        background-color: #5a6268 !important;
+        border-color: #5a6268 !important;
+        color: white !important;
+    }
+    
+    /* Filter button */
+    .filter-button,
+    .changelist-filters button {
+        background-color: #6c757d !important;
+        border-color: #6c757d !important;
+        color: white !important;
+    }
+    
+    /* Pagination buttons (if any) */
+    .paginator button,
+    .paginator .step-links a {
+        background-color: #6c757d !important;
+        border-color: #6c757d !important;
+        color: white !important;
+    }
+    
+
+        /* Hide Jazzmin version text from footer
+        i have added this chane at the beining because it has been one of the last UI editations  */
+    .main-footer .float-right {
+        display: none !important;
+    }
+    /* ============================================
+    FIXED POSITIONING FOR NAVIGATION
+    ============================================ */
+    
+    .main-header {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        z-index: 1030 !important;
+        background-color: #9e8f5e !important;
+    }
+    
+    .main-sidebar {
+        position: fixed !important;
+        top: 0px !important;
+        left: 0 !important;
+        height: calc(100% - 100px) !important;
+        z-index: 1020 !important;
+        overflow-y: auto !important;
+        background-color: #9e8f5e !important;
+    }
+    
+    .content-wrapper {
+        margin-top: 50px !important;
+        margin-bottom: 50px !important;
+        min-height: calc(100vh - 100px) !important;
+    }
+    
+    .main-footer {
+        position: fixed !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        background-color: #6b5f2a !important;
+        color: #2c2b28 !important;
+        text-align: center !important;
+        padding: 10px !important;
+        z-index: 1030 !important;
+        font-size: 14px !important;
+        border-top: 1px solid #2f2f2f !important;
+    }
+    
+    .main-footer a {
+        color: #2c2b28 !important;
+        text-decoration: none !important;
+    }
+    
+    .main-footer a:hover {
+        color: white !important;
+        text-decoration: underline !important;
+    }
+    
+    body {
+        margin-bottom: 0 !important;
+        overflow-x: hidden !important;
+    }
+    
+    .content {
+        padding-bottom: 20px !important;
+    }
+    
+    .main-header,
+    .main-header .navbar,
+    .main-sidebar,
+    .main-sidebar .sidebar,
+    .sidebar-dark-primary,
+    .sidebar-dark-primary .sidebar {
+        background-color: #8a7a3c !important;
+    }
+    
+    .brand-link {
+        display: none !important;
+    }
+    
+    .custom-brand-container {
+        display: flex !important;
+        align-items: center !important;
+        padding: 8px 15px !important;
+        background: #8a7d52 !important;
+        margin: 0 !important;
+        height: 50px !important;
+    }
+    
+    .custom-brand-container img {
+        height: 35px !important;
+        width: auto !important;
+        margin-right: 10px !important;
+    }
+    
+    .custom-brand-text h1 {
+        margin: 0 !important;
+        font-size: 0.95rem !important;
+        line-height: 1.2 !important;
+    }
+    
+    .custom-brand-text h1 a {
+        color: white !important;
+        text-decoration: none !important;
+    }
+    
+    .custom-brand-text small {
+        color: #d4d4d4 !important;
+        font-size: 0.6rem !important;
+    }
+    
+    /* ============================================
+       SIDEBAR - ALL TEXT WHITE
+    ============================================ */
+    
+    .nav-sidebar .nav-link p,
+    .nav-sidebar .nav-link span {
+        color: white !important;
+    }
+    
+    .nav-sidebar .nav-link i,
+    .nav-sidebar .nav-icon {
+        color: white !important;
+    }
+    
+    .nav-header {
+        color: white !important;
+        font-weight: bold !important;
+    }
+    
+    .nav-sidebar .nav-link.active p,
+    .nav-sidebar .nav-link:hover p,
+    .nav-sidebar .nav-link.active i,
+    .nav-sidebar .nav-link:hover i {
+        color: white !important;
+    }
+    
+    .nav-sidebar .nav-link.active {
+        background-color: #8a7d52 !important;
+    }
+    
+    .navbar-nav .nav-link .badge {
+        background-color: #6b5f2a !important;
+        color: white !important;
+    }
+    
+    .sidebar {
+        padding-top: 0 !important;
+    }
+    
+    /* ============================================
+       TOP RIGHT ADMIN TEXT - WHITE ONLY
+    ============================================ */
+    
+    .user-menu .dropdown-toggle,
+    .user-menu .dropdown-toggle span,
+    .navbar-nav .user-menu .nav-link,
+    .dropdown-toggle .d-none,
+    .dropdown-toggle .d-lg-inline {
+        color: white !important;
+    }
+    
+    /* Keep language selector normal */
+    .language-selector,
+    .language-selector * {
+        color: #2c2b28 !important;
+    }
+    
+    /* Fix language dropdown menu */
+    .dropdown-menu {
+        background-color: white !important;
+        color: #2c2b28 !important;
+    }
+    
+    .dropdown-menu .dropdown-item {
+        color: #2c2b28 !important;
+    }
+    
+    .dropdown-menu .dropdown-item:hover {
+        background-color: #9e8f5e !important;
+        color: white !important;
+    }
+    
+    /* ============================================
+       MAIN BODY - Model names GRAY & BOLD
+    ============================================ */
+    
+    .dashboard .module table th a,
+    .dashboard .app-module .model a,
+    .dashboard .model-list .model-name a,
+    .app-module .model a {
+        color: #6c757d !important;
+        font-weight: bold !important;
+    }
+    
+    .module h2, 
+    .card-header h2, 
+    .card-header .card-title,
+    .app-module h2 {
+        color: #6c757d !important;
+        font-weight: bold !important;
+    }
+    
+    th.column-__str__ a,
+    th a,
+    .field-__str__ a,
+    .changelist table thead th a {
+        color: #6c757d !important;
+        font-weight: bold !important;
+    }
+    
+    /* ============================================
+       BUTTON COLOR CUSTOMIZATION
+    ============================================ */
+    
+    .submit-row input[type="submit"],
+    input[type="submit"].default,
+    .button.default,
+    button.default,
+    .addlink,
+    .object-tools a.addlink {
+        background-color: #6c757d !important;
+        border-color: #6c757d !important;
+        font-weight: bold !important;
+        color: white !important;
+    }
+    
+    .submit-row input[type="submit"]:hover,
+    .button.default:hover,
+    .addlink:hover,
+    .object-tools a.addlink:hover {
+        background-color: #5a6268 !important;
+        color: white !important;
+    }
+    
+    input[type="submit"].button,
+    input[name="_save"],
+    input[name="_continue"],
+    input[name="_addanother"] {
+        background-color: #9e8f5e !important;
+        border-color: #9e8f5e !important;
+        font-weight: bold !important;
+        color: white !important;
+    }
+    
+    input[type="submit"].button:hover,
+    input[name="_save"]:hover,
+    input[name="_continue"]:hover {
+        background-color: #8a7d52 !important;
+        color: white !important;
+    }
+    
+    .deletelink,
+    input[name="_delete"] {
+        background-color: #ba2c2c !important;
+        border-color: #ba2c2c !important;
+        font-weight: bold !important;
+        color: white !important;
+    }
+    
+    .historylink {
+        background-color: #6c757d !important;
+        border-color: #6c757d !important;
+        font-weight: bold !important;
+        color: white !important;
+    }
+    
+    .viewsitelink {
+        background-color: #17a2b8 !important;
+        border-color: #17a2b8 !important;
+        font-weight: bold !important;
+        color: white !important;
+    }
+    
+    .submit-row {
+        gap: 10px !important;
+    }
+    
+    .submit-row input {
+        border-radius: 4px !important;
+        padding: 8px 16px !important;
+        font-weight: bold !important;
+        color: white !important;
+    }
+    
+    button,
+    input[type="submit"],
+    input[type="button"],
+    .btn,
+    .addlink,
+    .deletelink {
+        font-weight: bold !important;
+        color: white !important;
+    }
+    
+    /* ============================================
+       FIX HOME LINK & VIEW SITE LINK - WHITE
+    ============================================ */
+    
+    /* Make Home link white */
+    .topmenu-actions .nav-link,
+    .topmenu-links .nav-link,
+    .nav-link[href*="/admin/"],
+    .nav-link[href*="index"],
+    .navbar-nav .nav-link:not(.user-menu) {
+        color: white !important;
+    }
+    
+    /* Make View Site link white */
+    a[target="_blank"],
+    .topmenu-links a[target="_blank"] {
+        color: white !important;
+    }
+    
+    /* Any link in the top navigation bar */
+    .main-header .navbar .nav-link {
+        color: white !important;
+    }
+    
+    /* ============================================
+       FIX SEARCH ICON - MAKE VISIBLE
+    ============================================ */
+    
+    /* Search button icon */
+    .search-form button i,
+    .search-form .fa-search,
+    button[type="submit"] i,
+    .fa-search {
+        color: #2c2b28 !important;
+        font-size: 14px !important;
+    }
+    
+    /* Search button background */
+    .search-form button {
+        background-color: #8a7d52 !important;
+        border-color: #8a7d52 !important;
+    }
+    
+    /* Search input field */
+    .search-form input {
+        background-color: white !important;
+        color: #2c2b28 !important;
+    }
+    
+    /* Search input placeholder */
+    .search-form input::placeholder {
+        color: #8a7d52 !important;
+    }
+    
+    /* ============================================
+       SCROLLBAR STYLING
+    ============================================ */
+    
+    .main-sidebar::-webkit-scrollbar {
+        width: 8px !important;
+    }
+    
+    .main-sidebar::-webkit-scrollbar-track {
+        background: #9e8f5e !important;
+    }
+    
+    .main-sidebar::-webkit-scrollbar-thumb {
+        background: #8a7d52 !important;
+        border-radius: 4px !important;
+    }
+    
+    .main-sidebar::-webkit-scrollbar-thumb:hover {
+        background: #6d6240 !important;
+    }
+
+        /* ============================================
+       LANGUAGE SELECTOR - Clean & Compact
+    ============================================ */
+    
+    .language-selector .dropdown-menu {
+        min-width: 100px !important;
+        width: auto !important;
+        padding: 5px 0 !important;
+        border-radius: 4px !important;
+    }
+    
+    .language-selector .dropdown-item {
+        padding: 4px 12px !important;
+        font-size: 12px !important;
+        line-height: 1.2 !important;
+    }
+    
+    .language-selector .dropdown-toggle {
+        background: transparent !important;
+        border: none !important;
+        color: #2c2b28 !important;
+        font-size: 12px !important;
+        padding: 6px 10px !important;
+    }
+    
+    .language-selector .dropdown-toggle:hover {
+        background-color: #8a7d52 !important;
+        color: white !important;
+        border-radius: 4px !important;
+    }
+    
+    /* Remove blue from dropdown */
+    .dropdown-menu {
+        background-color: white !important;
+        border: 1px solid #ddd !important;
+    }
+    
+    .dropdown-item:hover {
+        background-color: #9e8f5e !important;
+        color: white !important;
+    }
+    
+    .dropdown-item:active,
+    .dropdown-item.active {
+        background-color: #8a7d52 !important;
+        color: white !important;
+    }
+    
+    /* Remove any blue from language button */
+    .language-selector .btn-primary:focus,
+    .language-selector .btn-primary:active,
+    .language-selector .btn-primary.active {
+        background-color: transparent !important;
+        border-color: transparent !important;
+        box-shadow: none !important;
+    }
+
+    /* ============================================
+       FIX ALL PERMISSION TEXT AND CHECKBOXES
+    ============================================ */
+    
+    /* General permission text */
+    .permission-group .permission-group-header,
+    .permission-group .permission-name,
+    .aligned label,
+    .form-row label,
+    .actions label {
+        color: #2c2b28 !important;
+    }
+    
+    /* Choose all links */
+    .permission-group .group-actions a,
+    .selector-chooseall,
+    .selector-clearall {
+        color: #2F5D50 !important;
+        font-weight: bold !important;
+        text-decoration: none !important;
+    }
+    
+    .permission-group .group-actions a:hover,
+    .selector-chooseall:hover,
+    .selector-clearall:hover {
+        color: #9e8f5e !important;
+        text-decoration: underline !important;
+    }
+    
+    /* Checkboxes */
+    input[type="checkbox"] {
+        accent-color: #9e8f5e !important;
+    }
+    
+    /* Permission tables */
+    .permissions table th,
+    .permissions table td,
+    .permissions td {
+        color: #2c2b28 !important;
+    }
+    
+    /* Available/Chosen sections */
+    .selector-available h2,
+    .selector-chosen h2 {
+        color: #2c2b28 !important;
+        background-color: #f5f5f5 !important;
+        padding: 8px !important;
+        border-radius: 4px !important;
+    }
+    
+    /* Filter input */
+    .selector-filter input {
+        background-color: white !important;
+        color: #2c2b28 !important;
+        border: 1px solid #ddd !important;
+    }
+    
+    /* Selection lists */
+    .selector-available select,
+    .selector-chosen select,
+    .permissions-grid select {
+        background-color: white !important;
+        color: #2c2b28 !important;
+        border: 1px solid #ddd !important;
+    }
+    
+    /* Action checkboxes */
+    .action-checkbox label,
+    .action-label {
+        color: #2c2b28 !important;
+    }
+
+</style>
+{% endblock %}
+
+{% block branding %}
+<div class="custom-brand-container">
+    <img src="/media/logos/ims-logo.png" alt="IMS Malawi Logo">
+    <div class="custom-brand-text">
+        <h1>
+            <a href="{% url 'admin:index' %}">
+                IMS Malawi Union
+            </a>
+        </h1>
+        <small>Seventh-Day Reform Movement</small>
+    </div>
+</div>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

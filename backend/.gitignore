@@ -1,0 +1,66 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+pythonenv*
+
+# Django
+db.sqlite3
+db.sqlite3-journal
+*.log
+local_settings.py
+*.pot
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Media and static files
+media/
+staticfiles/
+static_collected/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Database backups
+*.sql
+*.dump
+
+# Logs
+logs/
+*.log
+
+# Migration files (optional - uncomment if you want to ignore migrations)
+# */migrations/*.py
+# !*/migrations/__init__.py
+
+# Docker
+*.pid
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.mypy_cache/
+
+# React/Node (for future)
+node_modules/
+build/
+dist/
+.next/
+.nuxt/
+.env.local
