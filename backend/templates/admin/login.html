@@ -2,22 +2,11 @@
 {% load static %}
 
 {% block extrahead %}
-<link rel="icon" href="/media/logos/ims-icon.png" type="image/png">
+<link rel="icon" href="/static/admin/img/ims-icon.png" type="image/png">
 <style>
-    /* ============================================
-       LOGIN PAGE GRADIENT BACKGROUND
-    ============================================ */
-    
-    /* Target the login page body and container */
-    html, body, .login {
-        background: linear-gradient(to right, #f4f4f4, #e9ecef) !important;
-        min-height: 100vh !important;
-        background-attachment: fixed !important;
-    }
-    
-    /* Remove any dark overlays */
-    .login::before {
-        display: none !important;
+    /* Login page background */
+    .login {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
     }
     
     /* Fix login form size */
@@ -29,32 +18,29 @@
     .card {
         border-radius: 10px !important;
         box-shadow: 0 5px 20px rgba(0,0,0,0.1) !important;
-        background: white !important;
     }
     
     .card-body {
         padding: 1.5rem !important;
     }
     
-    /* Login button color */
     .btn-primary {
-        background-color: #83A371 !important;
-        border-color: #83A371 !important;
+        background-color: #9e8f5e !important;
+        border-color: #9e8f5e !important;
         padding: 8px 20px !important;
         font-size: 14px !important;
     }
     
     .btn-primary:hover {
-        background-color: #6d8a5e !important;
-        border-color: #6d8a5e !important;
+        background-color: #8a7d52 !important;
+        border-color: #8a7d52 !important;
     }
     
     .form-control:focus {
-        border-color: #83A371 !important;
-        box-shadow: 0 0 0 0.2rem rgba(131, 163, 113, 0.25) !important;
+        border-color: #9e8f5e !important;
+        box-shadow: 0 0 0 0.2rem rgba(158, 143, 94, 0.25) !important;
     }
     
-    /* Hide any default branding on login page */
     .login-logo {
         display: none !important;
     }
@@ -63,9 +49,9 @@
 
 {% block content %}
 <div style="text-align: center; margin-bottom: 25px;">
-    <img src="/media/logos/ims-logo.png" alt="IMS Malawi Logo" style="max-width: 100px; height: auto; margin-bottom: 10px;">
+    <img src="/static/admin/img/ims-logo.png" alt="IMS Malawi Logo" style="max-width: 100px; height: auto; margin-bottom: 10px;">
     <h3 style="margin: 0; color: #2F5D50; font-size: 1.2rem;">IMS Malawi Union</h3>
-    
+    <p style="color: #666; margin-top: 5px; font-size: 0.75rem;">Seventh-Day Reform Movement</p>
 </div>
 {{ block.super }}
 {% endblock %}

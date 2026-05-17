@@ -18,7 +18,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Detect if running on Render
 ON_RENDER = os.environ.get('RENDER', False)
-DEBUG = os.getenv('DEBUG', 'True') == 'True'
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 # ==============================================
 # SECURITY SETTINGS
@@ -27,7 +27,7 @@ DEBUG = os.getenv('DEBUG', 'True') == 'True'
 SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-your-secret-key-here-change-in-production')
 
 # ALLOWED HOSTS - Render deployment
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.onrender.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.onrender.com', 'ims-malawi-backend.onrender.com']
 
 # Add Render's external hostname automatically
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
@@ -107,7 +107,6 @@ WSGI_APPLICATION = 'ims_malawi_backend.wsgi.application'
 DATABASE_URL = os.environ.get('DATABASE_URL')
 
 if DATABASE_URL:
-    # Production on Render: Use PostgreSQL (Supabase)
     DATABASES = {
         'default': dj_database_url.config(
             default=DATABASE_URL,
@@ -117,7 +116,6 @@ if DATABASE_URL:
         )
     }
 else:
-    # Development: Use SQLite
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -225,17 +223,13 @@ CORS_ALLOWED_ORIGINS = [
 CORS_ALLOW_CREDENTIALS = True
 
 # ==============================================
-# JAZZMIN CONFIGURATION
+# JAZZMIN CONFIGURATION - FIXED FOR PRODUCTION
 # ==============================================
 
 JAZZMIN_SETTINGS = {
     "site_title": "IMS Malawi Union Admin",
     "site_header": "IMS Malawi Union",
-    "site_brand": None,
-    "site_logo": None,
-    "login_logo": None,
-    "site_icon": "/media/logos/ims-icon.png",
-    "site_logo_classes": "",
+    "site_brand": "IMS Malawi",
     "welcome_sign": "Welcome to IMS Malawi Union Admin Panel",
     "copyright": "IMS Malawi Union",
     "search_model": ["auth.User", "content.ContentItem"],
@@ -250,7 +244,6 @@ JAZZMIN_SETTINGS = {
     "hide_apps": [],
     "hide_models": [],
     "order_with_respect_to": ["auth", "content", "core", "payments"],
-    "custom_links": {},
     "icons": {
         "auth": "fas fa-users-cog",
         "auth.user": "fas fa-user",
