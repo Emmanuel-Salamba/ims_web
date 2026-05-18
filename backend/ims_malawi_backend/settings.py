@@ -230,6 +230,7 @@ JAZZMIN_SETTINGS = {
     "site_title": "IMS Malawi Union Admin",
     "site_header": "IMS Malawi Union",
     "site_brand": "IMS Malawi",
+    "site_icon": "/static/admin/img/ims-icon.png", 
     "welcome_sign": "Welcome to IMS Malawi Union Admin Panel",
     "copyright": "IMS Malawi Union",
     "search_model": ["auth.User", "content.ContentItem"],
